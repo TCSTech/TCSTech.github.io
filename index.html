@@ -36,6 +36,10 @@
     <input type="text" ng-model="employee.direct" id="direct">
     </div>
     <div>
+    <label for="mobile">Mobile Number: </label>
+    <input type="text" ng-model="employee.mobile" id="mobile">
+    </div>
+    <div>
     <label for="location">Location: </label>
     <select ng-model="employee.location" id="location" 
     ng-options="address.name for address in addresses"></select>
@@ -61,6 +65,7 @@
                 {{employee.location.citystatezip}}<br>
                 888.449.8473 <span ng-if="employee.extension">x{{employee.extension}}</span> toll free 
                 <span ng-if="employee.direct">| {{employee.direct}} direct</span>  
+                <span ng-if="employee.mobile">| {{employee.mobile}} mobile</span>  
                 <span ng-if="employee.fax">| 888.338.8473 fax</span>  
                 | <a href="http://tcstire.com">tcstire.com</a>
             </td>
