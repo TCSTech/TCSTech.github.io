@@ -1,0 +1,106 @@
+<!doctype html>
+<html ng-app="signature">
+<head>
+<style>
+    body {font-size: 10pt; color:black;font-family: verdana,arial,helvetica, sans-serif;}
+    .name {}
+    .logo {display: block;}
+    .address-phone-social {color:gray;}
+    .confidential-notice {font-size:8.0pt; color:gray;}
+    .please-no-print {color: #009900; }
+    .noprint-logo {font-family: webdings;font-size: 14pt; font-weight:bold;}
+    * + * {margin-top: .8em;}
+    label {display: inline-block; width: 100px; text-align: right; font-weight:bold;}
+</style>
+</head>
+<body ng-controller="sigCtrl">
+    <h1>Enter your information here</h1>
+    <form>
+    <div>
+    <label for="name">Name: </label>
+    <input type="text" ng-model="employee.name" id="name">
+    </div>
+    <div>
+    <label for="title">Title: </label>
+    <input type="text" ng-model="employee.title" id="title">
+    </div>
+    <div>
+    <label for="ext">Extension: </label>
+    <input type="number" ng-model="employee.extension" id="ext">
+    </div>
+    <div>
+    <label for="direct">Direct Line: </label>
+    <input type="text" ng-model="employee.direct" id="direct">
+    </div>
+    <div>
+    <label for="location">Location: </label>
+    <select ng-model="employee.location" id="location" 
+    ng-options="address.name for address in addresses"></select>
+    </div>
+    <div>
+    <label for="fax">Add fax?: </label>
+    <input type="checkbox" ng-model="employee.fax" id="fax" />
+    </div>
+    </form>
+    <h1>Copy signature below</h1>
+    <div class="name">
+        <strong>{{employee.name}}</strong> <span ng-if="employee.title">| <em>{{employee.title}}</em></span>
+    </div>
+    <table>
+        <tr>
+            <td><a href="http://tcstire.com">
+                <img src="http://tcstire.com/img/logos/tcs-logo-signature.png" />
+                </a>
+            </td>
+            <td class="address-phone-social">
+                TCS Technologies, an ARI Company | 
+                {{employee.location.street}} | 
+                {{employee.location.citystatezip}}<br>
+                (888) 449-8473<span ng-if="employee.extension"> x{{employee.extension}}</span> toll free 
+                <span ng-if="employee.direct">| {{employee.direct}} direct</span>  
+                <span ng-if="employee.fax">| 888.338.8473 fax</span>  
+                | <a href="http://tcstire.com">tcstire.com</a>
+            </td>
+        </tr>
+    </table>
+    <div class="address-phone-social">Get Social With Us: 
+        <a href="https://www.facebook.com/TireCompanySolutions">
+            <img src="http://tcstire.com/img/logos/facebook-logo-signature.png" />
+        </a> 
+        <a href="https://twitter.com/TCSTirePower">
+            <img src="http://tcstire.com/img/logos/twitter-logo-signature.png" />
+        </a>
+    </div>
+    <div class="confidential-notice">CONFIDENTIALITY NOTICE: This transmission may contain confidential information. If you have received this transmission in error, please notify the sender immediately and destroy this material.
+    </div>
+<div class="please-no-print"><span class=" noprint-logo">P</span> Please
+consider the environment before printing this email</div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.5/angular.min.js"></script>
+<script>
+(function(angular, window, undefined) {
+    angular.module('signature',[])
+    .controller('sigCtrl',function($scope){
+        $scope.employee = JSON.parse(localStorage.getItem('employee')) || {};
+        $scope.$watch('employee',function(result) {
+            console.log(result);
+            localStorage.setItem('employee',JSON.stringify($scope.employee));
+        }, true);
+
+
+        $scope.addresses = [
+            {
+                name: "Utah",
+                street: "75 E. 400 S.",
+                citystatezip: "SLC, UT 84111"
+            },
+            {
+                name: "Tennessee",
+                street: "3313 Williams Enterprise Drive",
+                citystatezip: "Cookeville, TN 38506"
+            }
+        ];
+    });
+})(angular,window);
+</script>
+</html>
