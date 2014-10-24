@@ -9,6 +9,8 @@
     .confidential-notice {font-size:8.0pt; color:gray;}
     .please-no-print {color: #009900; }
     .noprint-logo {font-family: webdings;font-size: 14pt; font-weight:bold;}
+    a.social {text-decoration: none;}
+    a, a:visited {color:gray;}
     * + * {margin-top: .8em;}
     label {display: inline-block; width: 100px; text-align: right; font-weight:bold;}
 </style>
@@ -65,10 +67,10 @@
         </tr>
     </table>
     <div class="address-phone-social">Get Social With Us: 
-        <a href="https://www.facebook.com/TireCompanySolutions">
+        <a class="social" href="https://www.facebook.com/TireCompanySolutions">
             <img src="http://tcstire.com/img/logos/facebook-logo-signature.png" />
         </a> 
-        <a href="https://twitter.com/TCSTirePower">
+        <a class="social" href="https://twitter.com/TCSTirePower">
             <img src="http://tcstire.com/img/logos/twitter-logo-signature.png" />
         </a>
     </div>
@@ -77,14 +79,13 @@
 <div class="please-no-print"><span class=" noprint-logo">P</span> Please
 consider the environment before printing this email</div>
 </body>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.5/angular.min.js"></script>
 <script>
 (function(angular, window, undefined) {
     angular.module('signature',[])
     .controller('sigCtrl',function($scope){
         $scope.employee = JSON.parse(localStorage.getItem('employee')) || {};
         $scope.$watch('employee',function(result) {
-            console.log(result);
             localStorage.setItem('employee',JSON.stringify($scope.employee));
         }, true);
 
