@@ -84,9 +84,9 @@ consider the environment before printing this email</div>
 (function(angular, window, undefined) {
     angular.module('signature',[])
     .controller('sigCtrl',function($scope){
-        $scope.employee = JSON.parse(localStorage.getItem('employee')) || {};
+        $scope.employee = JSON.parse(localStorage.getItem('employee-sig')) || {};
         $scope.$watch('employee',function(result) {
-            localStorage.setItem('employee',JSON.stringify($scope.employee));
+            localStorage.setItem('employee-sig',JSON.stringify($scope.employee));
         }, true);
 
 
